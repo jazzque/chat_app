@@ -1,0 +1,18 @@
+defaults: &defaults
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  username: activebilling
+  password: 'password'
+  timeout: 10000
+
+production:
+  <<: *defaults
+
+test:
+  database: beersmap_test
+  <<: *defaults
+
+development:
+  database: beersmap_development
+  <<: *defaults
