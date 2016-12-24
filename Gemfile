@@ -24,7 +24,8 @@ gem 'pry-byebug'
 
 #
 gem 'ffaker'
-
+gem 'devise'
+gem 'rename'
 
 group :development, :test do
   gem 'byebug', platform: :mri

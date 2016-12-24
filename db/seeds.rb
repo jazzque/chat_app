@@ -6,11 +6,3 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-100.times do
-  User.new(
-    first_name: FFaker::Name.first_name,
-    last_name: FFaker::Name.last_name,
-    phone: FFaker::PhoneNumber.phone_number,
-    country: FFaker::Address.country
-  ).save!
-end
