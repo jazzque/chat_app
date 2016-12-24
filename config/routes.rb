@@ -1,4 +1,4 @@
-BeersMap::Application.routes.draw do
+SimpleChat::Application.routes.draw do
 
   namespace :client, path: '' do
     root to: 'welcome#index'
