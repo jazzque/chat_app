@@ -1,5 +1,7 @@
 module Client
-  class WelcomeController < Client::BaseController
+  class WelcomeController < ApplicationController
+    layout 'client'
+
     def index
     end
   end
