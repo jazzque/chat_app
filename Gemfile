@@ -21,6 +21,7 @@ gem 'haml-rails'
 gem 'pg'
 gem 'pry-rails'
 gem 'pry-byebug'
+gem 'simple_form'
 
 #
 gem 'ffaker'
