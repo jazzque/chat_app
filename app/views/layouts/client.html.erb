@@ -9,10 +9,7 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    <%= link_to 'login', new_user_session_path %>
+    <%= render 'layouts/client/top_nav' %>
     <%= yield %>
   </body>
 </html>
