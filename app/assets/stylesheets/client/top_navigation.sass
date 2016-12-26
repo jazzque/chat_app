@@ -1,0 +1,101 @@
+=keyframes($animation-name)
+  @-webkit-keyframes #{$animation-name}
+    @content
+  @-moz-keyframes #{$animation-name}
+    @content
+  @keyframes #{$animation-name}
+    @content
+
+.navigation
+  height: 130px
+  .navigation__content
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-around
+    height: 50px
+    a.btn
+      background-color: #0F142A
+      // display: block
+      text-decoration: none
+      // position: relative
+      cursor: pointer
+      width: 55%
+      margin: 80px auto
+      font-size: 15px
+      color: #44B19B
+      line-height: 50px
+      height: 50px
+      border: 3px solid rgba(79, 117, 128, 0.5)
+      z-index: 1
+      transition: all 0.3s
+      margin: 5px
+      padding: 5px
+      &:hover
+        border-radius: 10px
+        box-shadow: 0 0 14px 1px #A74C64, 0 0 70px 10px #91A1F7, 0 0 126px 23px #45B19B
+    .navigation__info
+
+    .navigation__search
+    .navigation__session
+
+  .navigation__background
+    position: absolute
+    top: 0
+    z-index: -1
+    display: flex
+    justify-content: space-around
+    width: 100%
+    .svg-green, .svg-red, .svg-blue
+      transition: all 0.3s
+      position: relative
+    .svg-green
+      top: 20px
+      left: 50px
+      animation: fly-green 15s infinite ease-in-out
+    .svg-red
+      top: 10px
+      left: -80px
+      animation: fly-red 15s infinite ease-in-out
+    .svg-blue
+      top: 10px
+      left: -60px
+      animation: fly-blue 15s infinite ease-in-out
+
+  .navigation__hidden
+    .svg-left, .svg-right
+      z-index: -1
+      position: relative
+      opacity: 0.2
+      transform: scale(5.1)
+    .svg-left
+      top: -105px
+      left: 21px
+      animation
+      animation: fly-hidden-left 15s infinite ease-in-out
+    .svg-right
+      top: -110px
+      left: 100px
+      float: right
+      animation: fly-hidden-right 15s infinite ease-in-out
+
++keyframes(fly-green)
+  50%
+    transform: rotate3d(-1, 1, -1, -30deg) scale(0.9) rotate(-30deg)
++keyframes(fly-red)
+  50%
+    transform: rotate3d(1, -2, 1, 30deg) scale(1.1) rotate(10deg)
++keyframes(fly-blue)
+  50%
+    transform: rotate3d(-1, 2, 2, -10deg) rotate(-20deg)
++keyframes(fly-hidden-left)
+  50%
+    transform: scale(5.2) rotate(-10deg)
++keyframes(fly-hidden-right)
+  50%
+    transform: scale(5.2) rotate(10deg)
+
+
+
+
+

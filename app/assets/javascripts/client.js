@@ -1,1 +1,3 @@
-console.log('HELLLLLLLOOOOOOOO client')
+//= require jquery
+//= require jquery_ujs
+//= require_tree ./client
