@@ -25,7 +25,6 @@ module SimpleChat
     #     f.gsub(observers_path.to_s, '').gsub(/\.rb\z/, '')
     #   end
     # end
-
     config.active_record.raise_in_transactional_callbacks = true
 
     # config.before_configuration do
