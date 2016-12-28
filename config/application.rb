@@ -1,7 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
-
+require 'sprockets/es6'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -25,7 +25,6 @@ module SimpleChat
     #     f.gsub(observers_path.to_s, '').gsub(/\.rb\z/, '')
     #   end
     # end
-
     config.active_record.raise_in_transactional_callbacks = true
 
     # config.before_configuration do

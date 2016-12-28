@@ -22,7 +22,10 @@ gem 'pg'
 gem 'pry-rails'
 gem 'pry-byebug'
 gem 'simple_form'
-
+gem 'redis'
+gem 'bootstrap'
+gem 'sprockets'
+gem 'sprockets-es6'
 #
 gem 'ffaker'
 gem 'devise'

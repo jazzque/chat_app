@@ -1,1 +1,1 @@
-console.log('HELLLLLLLOOOOOOOO ADMIN')
+console.log('ADMIN')

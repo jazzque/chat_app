@@ -1,7 +1,10 @@
 SimpleChat::Application.routes.draw do
+  mount ActionCable.server => '/cable'
 
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   namespace :client, path: '' do
-    devise_for :users
     root to: 'welcome#index'
   end
 
