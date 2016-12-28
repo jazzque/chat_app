@@ -1,129 +1,129 @@
-$(document).ready(function(){
-  var canvasBody = document.getElementById("canvas__middle"),
-    canvas = canvasBody.getContext("2d"),
+// $(document).ready(function(){
+//   var canvasBody = document.getElementById("canvas__middle"),
+//     canvas = canvasBody.getContext("2d"),
 
-    w = canvasBody.width = window.innerWidth, //Full width
-    h = canvasBody.height = window.innerHeight - canvasBody.getBoundingClientRect().top, //Full height
+//     w = canvasBody.width = window.innerWidth, //Full width
+//     h = canvasBody.height = window.innerHeight - canvasBody.getBoundingClientRect().top, //Full height
 
-    tick = 0, //Tick in time
+//     tick = 0, //Tick in time
 
-    opts = { //Options, you can change those
-      backgroundColor: "#151921",
-      particleColor: "#ff0000",
-      particleAmount: 40,
-      defaultSpeed: 0.5,
-      addedSpeed: 0,
+//     opts = { //Options, you can change those
+//       backgroundColor: "#151921",
+//       particleColor: "#ff0000",
+//       particleAmount: 40,
+//       defaultSpeed: 0.5,
+//       addedSpeed: 0,
 
-      defaultRadius: 2,
-      addedRadius: 2,
+//       defaultRadius: 2,
+//       addedRadius: 2,
 
-      communicationRadius: 150, //The radius for the line
-    },
-    particles = [],
+//       communicationRadius: 150, //The radius for the line
+//     },
+//     particles = [],
 
-    Particle = function(Xpos, Ypos){
-      this.x = Xpos ? Xpos : Math.random()*w; //If there is not position stated, it takes a random position
-      this.y = Ypos ? Ypos : Math.random()*h; //Same here
-      this.speed = opts.defaultSpeed + Math.random()*opts.addedSpeed; //Speed + a bit of random one
-      this.directionAngle = Math.floor(Math.random()*360); //The angle of this particle its moving. !!!! TRUE ONLY ON INIT
-      this.color = opts.particleColor;
-      this.radius = opts.defaultRadius + Math.random()*opts.addedRadius; //Radius + a bit of random radius
-      this.d = { //Object, stores directions. Computes directions according to the random this.directionAngle
-        x: Math.cos(this.directionAngle)*this.speed,
-        y: Math.sin(this.directionAngle)*this.speed
-      };
-      this.update = function(){ //The update function. The function that calculates next coordinates
-        this.border(); //Checks if this particles touches the border and THEN computes the next coordinates
-        this.x += this.d.x; //Just adding the direction to the X
-        this.y += this.d.y; //Same but with Y
-      };
-      this.border = function(){ //The border function. Checks if this thing touches the border
-        if(this.x >= w || this.x <= 0){ //X walls
-          this.d.x *= -1;
-        }
-        if(this.y >= h || this.y <= 0){ //Floor and ceiling
-          this.d.y *= -1;
-        }
-        this.x > w ? this.x = w : this.x; //This is really important.
-        this.y > h ? this.y = h : this.y; //Same
-        this.x < 0 ? this.x = 0 : this.x; //Same
-        this.y < 0 ? this.y = 0 : this.y; //Same
+//     Particle = function(Xpos, Ypos){
+//       this.x = Xpos ? Xpos : Math.random()*w; //If there is not position stated, it takes a random position
+//       this.y = Ypos ? Ypos : Math.random()*h; //Same here
+//       this.speed = opts.defaultSpeed + Math.random()*opts.addedSpeed; //Speed + a bit of random one
+//       this.directionAngle = Math.floor(Math.random()*360); //The angle of this particle its moving. !!!! TRUE ONLY ON INIT
+//       this.color = opts.particleColor;
+//       this.radius = opts.defaultRadius + Math.random()*opts.addedRadius; //Radius + a bit of random radius
+//       this.d = { //Object, stores directions. Computes directions according to the random this.directionAngle
+//         x: Math.cos(this.directionAngle)*this.speed,
+//         y: Math.sin(this.directionAngle)*this.speed
+//       };
+//       this.update = function(){ //The update function. The function that calculates next coordinates
+//         this.border(); //Checks if this particles touches the border and THEN computes the next coordinates
+//         this.x += this.d.x; //Just adding the direction to the X
+//         this.y += this.d.y; //Same but with Y
+//       };
+//       this.border = function(){ //The border function. Checks if this thing touches the border
+//         if(this.x >= w || this.x <= 0){ //X walls
+//           this.d.x *= -1;
+//         }
+//         if(this.y >= h || this.y <= 0){ //Floor and ceiling
+//           this.d.y *= -1;
+//         }
+//         this.x > w ? this.x = w : this.x; //This is really important.
+//         this.y > h ? this.y = h : this.y; //Same
+//         this.x < 0 ? this.x = 0 : this.x; //Same
+//         this.y < 0 ? this.y = 0 : this.y; //Same
 
-      };
-      this.draw = function(){ //Just draws the points. Pretty easy. Takes the coords, color, radius - draws.
-        canvas.beginPath();
-        canvas.arc(this.x, this.y, this.radius, 0, Math.PI*2);
-        canvas.closePath();
-        canvas.fillStyle = this.color;
-        canvas.fill();
-      };
-    },
-    checkDistance = function(x1, y1, x2, y2){ //You got it. The point on the graph distance formula.
-      return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    },
-    //Here goes the function that makes lines!
-    // @param point1 -  The point that check for neighboors
-    // @param father -  The array the point suppose to take thing from
-    communicatePoints = function(point1, father){
-      for(var i = 0; i < father.length; i++){
-        var distance = checkDistance(point1.x, point1.y, father[i].x, father[i].y);
-        var opacity = 1 - distance/opts.communicationRadius;
-        if (opacity > 0){ //Draws the line
-          canvas.lineWidth = 0.5;
-          canvas.strokeStyle = "rgba(255,0,0,opacity)".replace("opacity", opacity);
-          canvas.beginPath();
-          canvas.moveTo(point1.x, point1.y);
-          canvas.lineTo(father[i].x, father[i].y);
-          canvas.closePath();
-          canvas.stroke();
-        }
-      }
-    };
+//       };
+//       this.draw = function(){ //Just draws the points. Pretty easy. Takes the coords, color, radius - draws.
+//         canvas.beginPath();
+//         canvas.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+//         canvas.closePath();
+//         canvas.fillStyle = this.color;
+//         canvas.fill();
+//       };
+//     },
+//     checkDistance = function(x1, y1, x2, y2){ //You got it. The point on the graph distance formula.
+//       return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+//     },
+//     //Here goes the function that makes lines!
+//     // @param point1 -  The point that check for neighboors
+//     // @param father -  The array the point suppose to take thing from
+//     communicatePoints = function(point1, father){
+//       for(var i = 0; i < father.length; i++){
+//         var distance = checkDistance(point1.x, point1.y, father[i].x, father[i].y);
+//         var opacity = 1 - distance/opts.communicationRadius;
+//         if (opacity > 0){ //Draws the line
+//           canvas.lineWidth = 0.5;
+//           canvas.strokeStyle = "rgba(255,0,0,opacity)".replace("opacity", opacity);
+//           canvas.beginPath();
+//           canvas.moveTo(point1.x, point1.y);
+//           canvas.lineTo(father[i].x, father[i].y);
+//           canvas.closePath();
+//           canvas.stroke();
+//         }
+//       }
+//     };
 
-  function setup(){ //Function called once to set everything up
-    for(var i = 0; i < opts.particleAmount; i++){
-      particles.push( new Particle() );
-    }
-    window.requestAnimationFrame(loop);
-  }
+//   function setup(){ //Function called once to set everything up
+//     for(var i = 0; i < opts.particleAmount; i++){
+//       particles.push( new Particle() );
+//     }
+//     window.requestAnimationFrame(loop);
+//   }
 
-  function loop(){ //Function of loop that will be called for a frame of the animation
-    window.requestAnimationFrame(loop);
-    tick++;
+//   function loop(){ //Function of loop that will be called for a frame of the animation
+//     window.requestAnimationFrame(loop);
+//     tick++;
 
-    //Drawing the background. Basically clearing the frame that was before
-    canvas.fillStyle = opts.backgroundColor;
-    canvas.fillRect(0,0,w,h);
-    canvas.clearRect(0,0,w,h);
+//     //Drawing the background. Basically clearing the frame that was before
+//     canvas.fillStyle = opts.backgroundColor;
+//     canvas.fillRect(0,0,w,h);
+//     canvas.clearRect(0,0,w,h);
 
-    //Executing particle functions
-    for(var i = 0; i < particles.length; i++){
-      particles[i].update();
-      particles[i].draw();
-    }
-    //Executing lines
-    for(var a = 0; a < particles.length; a++){
-      communicatePoints(particles[a], particles);
-    }
-  }
+//     //Executing particle functions
+//     for(var i = 0; i < particles.length; i++){
+//       particles[i].update();
+//       particles[i].draw();
+//     }
+//     //Executing lines
+//     for(var a = 0; a < particles.length; a++){
+//       communicatePoints(particles[a], particles);
+//     }
+//   }
 
-  //Executing the animation
-  setup();
+//   //Executing the animation
+//   setup();
 
-  //Some event listeners for backup to look professional
-  window.addEventListener("resize", function(){
-    w = canvasBody.width = window.innerWidth;
-    h = canvasBody.height = window.innerHeight - canvasBody.getBoundingClientRect().top;
-  });
+//   //Some event listeners for backup to look professional
+//   window.addEventListener("resize", function(){
+//     w = canvasBody.width = window.innerWidth;
+//     h = canvasBody.height = window.innerHeight - canvasBody.getBoundingClientRect().top;
+//   });
 
-  //The thing that adds a point. Basically, we pass the coords of the mouse. And they are applied instead of randomness. Check the line 26, 28 to know
-  canvasBody.addEventListener("click", function(e){
-    particles.push( new Particle(e.pageX, e.pageY) );
-  });
-  //The thing that removes a point.
-  canvasBody.addEventListener("contextmenu", function(e){
-    e.preventDefault();
-    particles.splice(particles.length - 1, 1); //Takes the last thing from the particles[];
-  });
-});
+//   //The thing that adds a point. Basically, we pass the coords of the mouse. And they are applied instead of randomness. Check the line 26, 28 to know
+//   canvasBody.addEventListener("click", function(e){
+//     particles.push( new Particle(e.pageX, e.pageY) );
+//   });
+//   //The thing that removes a point.
+//   canvasBody.addEventListener("contextmenu", function(e){
+//     e.preventDefault();
+//     particles.splice(particles.length - 1, 1); //Takes the last thing from the particles[];
+//   });
+// });
 
