@@ -3,7 +3,7 @@ module Client
     layout 'client'
 
     def index
-      @messages = Message.all.limit(5)
+      @messages = Message.last(2)
       @message = Message.new
     end
   end

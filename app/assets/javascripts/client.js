@@ -1,4 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree ./client
+//= require angular
+//= require angular-resource
 //= require ./cable
+//= require ./client/app
+//= require_tree ./client

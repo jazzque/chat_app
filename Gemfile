@@ -26,6 +26,7 @@ gem 'redis'
 gem 'bootstrap'
 gem 'sprockets'
 gem 'sprockets-es6'
+gem 'angularjs-rails'
 #
 gem 'ffaker'
 gem 'devise'
