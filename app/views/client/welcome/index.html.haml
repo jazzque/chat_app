@@ -1,9 +1,12 @@
-/ %canvas(id='canvas__middle')
+%canvas(id='canvas__middle')
 
-%div(class='wrapper')
-  = render @messages
+%div(class='main-page__content' ng-controller="MainChatController as vm" ng-init='vm.init()')
+  %div(class='wrapper')
+    = render @messages
 
-  = form_for @message, url: '#' do |f|
+  = simple_form_for @message, url: '#' do |f|
     = f.text_area :body
-  %button(class='btn')
-    test
+  %button(ng-click='vm.send_message()')
+    Send
+
+/ think how to correct build form
